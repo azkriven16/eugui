@@ -5,15 +5,22 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-export interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface MagneticButtonProps {
+  children?: React.ReactNode
+  className?: string
+  disabled?: boolean
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
   strength?: number
+  type?: 'button' | 'reset' | 'submit'
 }
 
 export function MagneticButton({
   children,
   className,
+  disabled,
+  onClick,
   strength = 40,
-  ...props
+  type = 'button',
 }: MagneticButtonProps) {
   const ref = React.useRef<HTMLButtonElement>(null)
 
@@ -41,11 +48,13 @@ export function MagneticButton({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ x, y }}
+      disabled={disabled}
+      type={type}
+      onClick={onClick}
       className={cn(
         'relative inline-flex cursor-pointer items-center justify-center rounded-full bg-zinc-50 px-6 py-3 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200',
         className,
       )}
-      {...props}
     >
       {children}
     </motion.button>

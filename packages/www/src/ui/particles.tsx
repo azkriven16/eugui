@@ -128,6 +128,8 @@ export function Particles({
     }
 
     function onMouseMove(e: MouseEvent) {
+      if (!canvas)
+        return
       const rect = canvas.getBoundingClientRect()
       mouse.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
     }
