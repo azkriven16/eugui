@@ -9,7 +9,8 @@ const previews: Record<string, React.ComponentType> = {
 export function ComponentPreview({ name }: { name: string }) {
   const Preview = previews[name]
 
-  if (!Preview) return null
+  if (!Preview)
+    return null
 
   return (
     <section className="mb-10">

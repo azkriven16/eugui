@@ -1,6 +1,7 @@
-import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
+import * as React from 'react'
+
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
@@ -8,30 +9,30 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:     'bg-zinc-50 text-zinc-900 shadow hover:bg-zinc-200',
+        default: 'bg-zinc-50 text-zinc-900 shadow hover:bg-zinc-200',
         destructive: 'bg-red-600 text-white shadow-sm hover:bg-red-500',
-        outline:     'border border-zinc-700 bg-transparent text-zinc-100 shadow-sm hover:bg-zinc-800',
-        secondary:   'bg-zinc-800 text-zinc-100 shadow-sm hover:bg-zinc-700',
-        ghost:       'text-zinc-100 hover:bg-zinc-800 hover:text-zinc-50',
-        link:        'text-zinc-50 underline-offset-4 hover:underline',
+        outline: 'border border-zinc-700 bg-transparent text-zinc-100 shadow-sm hover:bg-zinc-800',
+        secondary: 'bg-zinc-800 text-zinc-100 shadow-sm hover:bg-zinc-700',
+        ghost: 'text-zinc-100 hover:bg-zinc-800 hover:text-zinc-50',
+        link: 'text-zinc-50 underline-offset-4 hover:underline',
       },
       size: {
         default: 'h-9 px-4 py-2',
-        sm:      'h-8 rounded-md px-3 text-xs',
-        lg:      'h-10 rounded-md px-8',
-        icon:    'h-9 w-9',
+        sm: 'h-8 rounded-md px-3 text-xs',
+        lg: 'h-10 rounded-md px-8',
+        icon: 'h-9 w-9',
       },
     },
     defaultVariants: {
       variant: 'default',
-      size:    'default',
+      size: 'default',
     },
   },
 )
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
