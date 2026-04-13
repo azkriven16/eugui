@@ -6,7 +6,10 @@
       "type": "registry:lib",
       "title": "Utils",
       "description": "The cn() utility — combines clsx and tailwind-merge.",
-      "dependencies": ["clsx", "tailwind-merge"],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
       "devDependencies": [],
       "registryDependencies": [],
       "files": [
@@ -21,9 +24,14 @@
       "type": "registry:component",
       "title": "Button",
       "description": "A button with variant and size props built on CVA.",
-      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
       "devDependencies": [],
-      "registryDependencies": ["utils"],
+      "registryDependencies": [
+        "utils"
+      ],
       "files": [
         {
           "path": "button.tsx",

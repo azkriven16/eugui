@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CodeBlock } from '@/components/code-block'
+import { ComponentPreview } from '@/components/component-preview'
 import { CopyButton } from '@/components/copy-button'
 import { getRegistryIndex, getRegistryItem } from '@/lib/registry'
 
@@ -55,6 +56,9 @@ export default async function ComponentPage({
       {item.description && (
         <p className="mb-10 text-zinc-400">{item.description}</p>
       )}
+
+      {/* Preview */}
+      <ComponentPreview name={name} />
 
       {/* Install */}
       <section className="mb-10">
