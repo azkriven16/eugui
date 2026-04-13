@@ -1,0 +1,20 @@
+{
+  "name": "spinner",
+  "type": "registry:component",
+  "title": "Spinner",
+  "description": "Animated loading spinner with size variants.",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "spinner.tsx",
+      "content": "import * as React from 'react'\nimport { cva, type VariantProps } from 'class-variance-authority'\nimport { cn } from '@/lib/utils'\n\nconst spinnerVariants = cva('animate-spin rounded-full border-2 border-current border-t-transparent', {\n  variants: {\n    size: {\n      sm:      'h-4 w-4',\n      default: 'h-6 w-6',\n      lg:      'h-8 w-8',\n    },\n  },\n  defaultVariants: {\n    size: 'default',\n  },\n})\n\nexport interface SpinnerProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof spinnerVariants> {}\n\nfunction Spinner({ className, size, ...props }: SpinnerProps) {\n  return (\n    <div\n      role=\"status\"\n      aria-label=\"Loading\"\n      className={cn(spinnerVariants({ size }), className)}\n      {...props}\n    />\n  )\n}\n\nexport { Spinner, spinnerVariants }\n",
+      "type": "component"
+    }
+  ]
+}

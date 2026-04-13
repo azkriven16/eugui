@@ -1,0 +1,46 @@
+name: Bug report
+description: Something isn't working
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a bug.
+
+  - type: input
+    id: version
+    attributes:
+      label: complib version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: node
+    attributes:
+      label: Node version
+      placeholder: "20.x"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: pm
+    attributes:
+      label: Package manager
+      options: [npm, pnpm, yarn, bun]
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Include the full command you ran and the error output.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true

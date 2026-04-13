@@ -1,0 +1,19 @@
+{
+  "name": "component-library-cli",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "pnpm -r --filter './packages/*' run build",
+    "dev": "pnpm --filter @complib/cli run dev",
+    "test": "vitest",
+    "typecheck": "pnpm -r --filter './packages/*' run typecheck",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.0.0",
+    "eslint": "^9.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
+  }
+}

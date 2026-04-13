@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "skills": {
+    "arch-tsdown-cli": {
+      "source": "hairyf/skills",
+      "sourceType": "github",
+      "computedHash": "0349126a1750ffb816f1dd584f49c900f551b8e97b843337d8b54c201e682895"
+    },
+    "component-library": {
+      "source": "shipshitdev/library",
+      "sourceType": "github",
+      "computedHash": "5a7987baca2e4eba269cf8f391a335dafb353eceea461f69d2068d877f365c31"
+    },
+    "npm-package": {
+      "source": "jwynia/agent-skills",
+      "sourceType": "github",
+      "computedHash": "2c66260f5e3220e9714f708833203d0313021c4d27c3aa006c9c35c7f7d6cb22"
+    }
+  }
+}
