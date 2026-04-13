@@ -1,0 +1,20 @@
+{
+  "name": "magnetic-button",
+  "type": "registry:component",
+  "title": "Magnetic Button",
+  "description": "Button that magnetically pulls toward the cursor and snaps back.",
+  "dependencies": [
+    "motion"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "magnetic-button.tsx",
+      "content": "'use client'\n\nimport { motion, useSpring } from 'motion/react'\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  strength?: number\n}\n\nexport function MagneticButton({\n  children,\n  className,\n  strength = 40,\n  ...props\n}: MagneticButtonProps) {\n  const ref = React.useRef<HTMLButtonElement>(null)\n\n  const x = useSpring(0, { damping: 20, stiffness: 200 })\n  const y = useSpring(0, { damping: 20, stiffness: 200 })\n\n  function handleMouseMove(e: React.MouseEvent<HTMLButtonElement>) {\n    if (!ref.current)\n      return\n    const rect = ref.current.getBoundingClientRect()\n    const centerX = rect.left + rect.width / 2\n    const centerY = rect.top + rect.height / 2\n    x.set((e.clientX - centerX) * (strength / 100))\n    y.set((e.clientY - centerY) * (strength / 100))\n  }\n\n  function handleMouseLeave() {\n    x.set(0)\n    y.set(0)\n  }\n\n  return (\n    <motion.button\n      ref={ref}\n      onMouseMove={handleMouseMove}\n      onMouseLeave={handleMouseLeave}\n      style={{ x, y }}\n      className={cn(\n        'relative inline-flex cursor-pointer items-center justify-center rounded-full bg-zinc-50 px-6 py-3 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200',\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </motion.button>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

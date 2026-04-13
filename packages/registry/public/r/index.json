@@ -38,6 +38,95 @@
           "type": "component"
         }
       ]
+    },
+    {
+      "name": "tilt-card",
+      "type": "registry:component",
+      "title": "Tilt Card",
+      "description": "3D perspective tilt with glare effect on mouse move.",
+      "dependencies": [
+        "motion"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "tilt-card.tsx",
+          "type": "component"
+        }
+      ]
+    },
+    {
+      "name": "magnetic-button",
+      "type": "registry:component",
+      "title": "Magnetic Button",
+      "description": "Button that magnetically pulls toward the cursor and snaps back.",
+      "dependencies": [
+        "motion"
+      ],
+      "devDependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "magnetic-button.tsx",
+          "type": "component"
+        }
+      ]
+    },
+    {
+      "name": "animated-beam",
+      "type": "registry:component",
+      "title": "Animated Beam",
+      "description": "Animated beam of light that travels along an SVG path between two elements.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "animated-beam.tsx",
+          "type": "component"
+        }
+      ]
+    },
+    {
+      "name": "particles",
+      "type": "registry:component",
+      "title": "Particles",
+      "description": "Interactive canvas particle field with mouse-reactive connections.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "particles.tsx",
+          "type": "component"
+        }
+      ]
+    },
+    {
+      "name": "morphing-text",
+      "type": "registry:component",
+      "title": "Morphing Text",
+      "description": "Words that blur and morph into each other on a loop.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "morphing-text.tsx",
+          "type": "component"
+        }
+      ]
     }
   ]
 }

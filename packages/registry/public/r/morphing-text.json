@@ -1,0 +1,18 @@
+{
+  "name": "morphing-text",
+  "type": "registry:component",
+  "title": "Morphing Text",
+  "description": "Words that blur and morph into each other on a loop.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "morphing-text.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface MorphingTextProps {\n  className?: string\n  duration?: number\n  words: string[]\n}\n\nexport function MorphingText({\n  className,\n  duration = 2500,\n  words,\n}: MorphingTextProps) {\n  const [index, setIndex] = React.useState(0)\n  const [visible, setVisible] = React.useState(true)\n\n  React.useEffect(() => {\n    const interval = setInterval(() => {\n      setVisible(false)\n      const t = setTimeout(() => {\n        setIndex(i => (i + 1) % words.length)\n        setVisible(true)\n      }, 350)\n      return () => clearTimeout(t)\n    }, duration)\n    return () => clearInterval(interval)\n  }, [words.length, duration])\n\n  return (\n    <span\n      className={cn(\n        'inline-block transition-all duration-300',\n        visible\n          ? 'translate-y-0 opacity-100 blur-0'\n          : 'translate-y-2 opacity-0 blur-sm',\n        className,\n      )}\n    >\n      {words[index]}\n    </span>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}
