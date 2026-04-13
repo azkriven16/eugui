@@ -19,7 +19,7 @@ export default async function ComponentsPage() {
           {index.items.length}
           {' components · run '}
           <code className="rounded bg-zinc-800 px-1.5 py-0.5 font-mono text-xs text-zinc-300">
-            npx complib@latest init
+            npx eugui@latest init
           </code>
           {' to get started'}
         </p>

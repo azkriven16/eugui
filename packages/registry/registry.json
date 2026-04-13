@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "complib",
-  "homepage": "https://complib.dev",
+  "name": "eugui",
+  "homepage": "https://eugui.dev",
   "items": [
     {
       "name": "utils",

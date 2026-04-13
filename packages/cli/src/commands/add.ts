@@ -22,7 +22,7 @@ export async function runAdd(
   cwd: string,
   opts: AddOptions = {},
 ): Promise<void> {
-  intro('complib add')
+  intro('eugui add')
 
   const s = spinner()
 

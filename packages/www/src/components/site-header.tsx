@@ -5,7 +5,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="font-semibold text-zinc-100 hover:text-white">
-          complib
+          eugui
         </Link>
         <nav className="flex items-center gap-6">
           <Link

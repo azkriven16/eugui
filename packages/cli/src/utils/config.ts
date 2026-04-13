@@ -11,7 +11,7 @@ export async function loadConfig(cwd: string): Promise<ComponentsConfig> {
 
   if (!existsSync(configPath)) {
     throw new Error(
-      `No ${CONFIG_FILENAME} found.\n   Run \`complib init\` to initialize your project.`,
+      `No ${CONFIG_FILENAME} found.\n   Run \`eugui init\` to initialize your project.`,
     )
   }
 

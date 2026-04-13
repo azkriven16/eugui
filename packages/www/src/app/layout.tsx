@@ -3,7 +3,7 @@ import { SiteHeader } from '@/components/site-header'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'complib — Copy-paste component registry',
+  title: 'eugui — Copy-paste component registry',
   description: 'A shadcn-style CLI for distributing React component libraries. No runtime. You own the code.',
 }
 

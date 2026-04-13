@@ -1,12 +1,12 @@
-# complib
+# eugui
 
 A shadcn-style CLI for distributing React component libraries via copy-paste.
 
 Users run one command and own the code — no runtime dependency, no black box.
 
 ```bash
-npx complib@latest init
-npx complib@latest add button
+npx eugui@latest init
+npx eugui@latest add button
 ```
 
 ---
@@ -18,7 +18,7 @@ npx complib@latest add button
 **1. Initialize your project**
 
 ```bash
-npx complib@latest init
+npx eugui@latest init
 ```
 
 Detects your framework and package manager, prompts for aliases and CSS path, then writes `components.json` and `lib/utils.ts`.
@@ -27,23 +27,23 @@ Detects your framework and package manager, prompts for aliases and CSS path, th
 
 ```bash
 # Add one component
-npx complib@latest add button
+npx eugui@latest add button
 
 # Add several at once
-npx complib@latest add button card input
+npx eugui@latest add button card input
 
 # Interactive picker (no args = multiselect)
-npx complib@latest add
+npx eugui@latest add
 
 # Preview without writing
-npx complib@latest add button --dry-run
+npx eugui@latest add button --dry-run
 ```
 
 **3. Browse available components**
 
 ```bash
-npx complib@latest list
-npx complib@latest info button
+npx eugui@latest list
+npx eugui@latest info button
 ```
 
 ---
@@ -108,10 +108,10 @@ your-registry/
 
 ```bash
 # Build → public/r/
-complib build
+eugui build
 
 # Custom paths
-complib build --src components --out dist/registry
+eugui build --src components --out dist/registry
 ```
 
 Then deploy `public/r/` as static files (Vercel, GitHub Pages, etc.).
@@ -152,10 +152,10 @@ pnpm install
 pnpm test
 
 # Build CLI
-pnpm --filter @complib/cli run build
+pnpm --filter @eugui/cli run build
 
 # Build registry (from packages/registry/)
-pnpm --filter @complib/registry run build:registry
+pnpm --filter @eugui/registry run build:registry
 ```
 
 ---

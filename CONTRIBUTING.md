@@ -15,7 +15,7 @@ pnpm install
 pnpm test
 
 # Typecheck
-pnpm --filter @complib/cli exec tsc --noEmit
+pnpm --filter @eugui/cli exec tsc --noEmit
 
 # Try the CLI locally (runs from source via tsx, no build needed)
 node packages/cli/bin/index.dev.mjs --help
@@ -41,7 +41,7 @@ packages/
 
 1. Create `packages/registry/src/<name>/<name>.tsx`
 2. Add an entry to `packages/registry/registry.json`
-3. Run `pnpm --filter @complib/registry run build:registry`
+3. Run `pnpm --filter @eugui/registry run build:registry`
 4. Commit both the source and the built `public/r/<name>.json`
 
 ## Submitting a PR

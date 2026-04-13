@@ -1,5 +1,5 @@
 {
-  "name": "@complib/registry",
+  "name": "@eugui/registry",
   "version": "0.1.0",
   "private": true,
   "type": "module",

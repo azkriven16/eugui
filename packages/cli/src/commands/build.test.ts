@@ -31,7 +31,7 @@ describe('runBuild', () => {
   let tmp: string
 
   beforeEach(() => {
-    tmp = join(tmpdir(), `complib-build-${Date.now()}`)
+    tmp = join(tmpdir(), `eugui-build-${Date.now()}`)
     mkdirSync(tmp, { recursive: true })
   })
 

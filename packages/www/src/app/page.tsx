@@ -21,9 +21,9 @@ export default function HomePage() {
 
       <div className="mb-8 flex items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-3">
         <code className="font-mono text-sm text-zinc-300">
-          npx complib@latest init
+          npx eugui@latest init
         </code>
-        <CopyButton text="npx complib@latest init" />
+        <CopyButton text="npx eugui@latest init" />
       </div>
 
       <div className="flex items-center gap-6 text-sm">
@@ -55,7 +55,7 @@ export default function HomePage() {
           },
           {
             title: 'Works with any stack',
-            body: 'Next.js, Vite, Remix, Astro — complib detects your framework and writes files where they belong.',
+            body: 'Next.js, Vite, Remix, Astro — eugui detects your framework and writes files where they belong.',
           },
         ].map(({ title, body }) => (
           <div key={title} className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-5">

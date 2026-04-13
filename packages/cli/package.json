@@ -1,11 +1,11 @@
 {
-  "name": "@complib/cli",
+  "name": "@eugui/cli",
   "version": "0.1.0",
   "description": "A shadcn-style CLI for distributing component libraries",
   "type": "module",
   "license": "MIT",
   "main": "./src/index.ts",
-  "bin": { "complib": "./bin/index.dev.mjs" },
+  "bin": { "eugui": "./bin/index.dev.mjs" },
   "publishConfig": {
     "main": "./dist/index.mjs",
     "exports": {
@@ -15,7 +15,7 @@
       },
       "./package.json": "./package.json"
     },
-    "bin": { "complib": "./bin/index.mjs" }
+    "bin": { "eugui": "./bin/index.mjs" }
   },
   "files": ["bin", "dist"],
   "keywords": ["cli", "components", "shadcn", "tailwind", "react", "ui", "copy-paste", "registry"],

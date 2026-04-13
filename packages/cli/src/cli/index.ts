@@ -8,13 +8,13 @@ import { runList } from '../commands/list'
 import { logger } from '../utils/logger'
 
 const program = new Command()
-  .name('complib')
+  .name('eugui')
   .description('A shadcn-style CLI for distributing component libraries')
   .version('0.1.0')
 
 program
   .command('init')
-  .description('Initialize your project with complib')
+  .description('Initialize your project with eugui')
   .action(async () => {
     await runInit(process.cwd())
   })

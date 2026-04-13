@@ -8,7 +8,7 @@ describe('detectPackageManager', () => {
   let tmp: string
 
   beforeEach(() => {
-    tmp = join(tmpdir(), `complib-pm-test-${Date.now()}`)
+    tmp = join(tmpdir(), `eugui-pm-test-${Date.now()}`)
     mkdirSync(tmp, { recursive: true })
   })
 

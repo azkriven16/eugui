@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: { params: Promise<{ name: str
   const item = await getRegistryItem(name)
   return {
     title: item
-      ? `${item.title ?? item.name} — complib`
-      : 'Not found — complib',
+      ? `${item.title ?? item.name} — eugui`
+      : 'Not found — eugui',
     description: item?.description,
   }
 }
@@ -32,7 +32,7 @@ export default async function ComponentPage({
     notFound()
   }
 
-  const installCmd = `npx complib@latest add ${item.name}`
+  const installCmd = `npx eugui@latest add ${item.name}`
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12">

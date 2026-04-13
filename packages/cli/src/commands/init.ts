@@ -40,7 +40,7 @@ function abortIfCancelled(value: unknown): void {
 }
 
 export async function runInit(cwd: string): Promise<void> {
-  intro('complib init')
+  intro('eugui init')
 
   // Check for existing config
   if (existsSync(join(cwd, 'components.json'))) {
@@ -155,5 +155,5 @@ export async function runInit(cwd: string): Promise<void> {
   await runInstall(pm, ['clsx', 'tailwind-merge'], cwd)
   s.stop('Base dependencies installed')
 
-  outro(`You're all set! Run \`complib add <component>\` to add your first component.`)
+  outro(`You're all set! Run \`eugui add <component>\` to add your first component.`)
 }

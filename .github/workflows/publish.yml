@@ -29,15 +29,15 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: pnpm --filter @complib/cli run build
+        run: pnpm --filter @eugui/cli run build
 
       - name: Typecheck
-        run: pnpm --filter @complib/cli exec tsc --noEmit
+        run: pnpm --filter @eugui/cli exec tsc --noEmit
 
       - name: Test
         run: pnpm test
 
       - name: Publish
-        run: pnpm publish --filter @complib/cli --access public --no-git-checks --provenance
+        run: pnpm publish --filter @eugui/cli --access public --no-git-checks --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -5,7 +5,7 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "build": "pnpm -r --filter './packages/*' run build",
-    "dev": "pnpm --filter @complib/cli run dev",
+    "dev": "pnpm --filter @eugui/cli run dev",
     "test": "vitest",
     "typecheck": "pnpm -r --filter './packages/*' run typecheck",
     "lint": "eslint ."
