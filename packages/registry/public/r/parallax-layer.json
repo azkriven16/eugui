@@ -1,0 +1,20 @@
+{
+  "name": "parallax-layer",
+  "type": "registry:component",
+  "title": "Parallax Layer",
+  "description": "Wraps content that moves at a different speed during scroll.",
+  "dependencies": [
+    "motion"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "parallax-layer.tsx",
+      "content": "'use client'\n\nimport { motion, useScroll, useTransform } from 'motion/react'\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface ParallaxLayerProps {\n  children: React.ReactNode\n  className?: string\n  speed?: number\n  horizontal?: boolean\n}\n\nexport function ParallaxLayer({\n  children,\n  className,\n  speed = 0.3,\n  horizontal = false,\n}: ParallaxLayerProps) {\n  const ref = React.useRef<HTMLDivElement>(null)\n  const { scrollYProgress } = useScroll({\n    target: ref,\n    offset: ['start end', 'end start'],\n  })\n\n  const range = speed * 80\n  const y = useTransform(\n    scrollYProgress,\n    [0, 1],\n    horizontal ? ['0px', '0px'] : [`${range}px`, `-${range}px`],\n  )\n  const x = useTransform(\n    scrollYProgress,\n    [0, 1],\n    horizontal ? [`${range}px`, `-${range}px`] : ['0px', '0px'],\n  )\n\n  return (\n    <div ref={ref} className={cn('overflow-hidden', className)}>\n      <motion.div style={{ y, x }}>{children}</motion.div>\n    </div>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

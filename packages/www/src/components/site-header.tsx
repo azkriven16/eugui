@@ -14,8 +14,14 @@ export function SiteHeader() {
           >
             Components
           </Link>
+          <Link
+            href="/blocks"
+            className="text-sm text-zinc-400 transition-colors hover:text-zinc-100"
+          >
+            Blocks
+          </Link>
           <a
-            href="https://github.com/YOUR_USERNAME/component-library-cli"
+            href="https://github.com/azkriven16/eugui"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-zinc-400 transition-colors hover:text-zinc-100"

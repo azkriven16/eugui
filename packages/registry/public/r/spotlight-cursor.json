@@ -1,0 +1,20 @@
+{
+  "name": "spotlight-cursor",
+  "type": "registry:component",
+  "title": "Spotlight Cursor",
+  "description": "Full-page radial spotlight that smoothly follows the cursor.",
+  "dependencies": [
+    "motion"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "spotlight-cursor.tsx",
+      "content": "'use client'\n\nimport { motion, useMotionTemplate, useMotionValue, useSpring } from 'motion/react'\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface SpotlightCursorProps {\n  className?: string\n  color?: string\n  size?: number\n  fixed?: boolean\n}\n\nexport function SpotlightCursor({\n  className,\n  color = 'rgba(167, 139, 250, 0.12)',\n  size = 450,\n  fixed = true,\n}: SpotlightCursorProps) {\n  const mouseX = useMotionValue(-9999)\n  const mouseY = useMotionValue(-9999)\n  const x = useSpring(mouseX, { damping: 28, stiffness: 160 })\n  const y = useSpring(mouseY, { damping: 28, stiffness: 160 })\n  const background = useMotionTemplate`radial-gradient(${size}px circle at ${x}px ${y}px, ${color}, transparent 80%)`\n  const ref = React.useRef<HTMLDivElement>(null)\n\n  React.useEffect(() => {\n    const onMove = (e: MouseEvent) => {\n      if (fixed) {\n        mouseX.set(e.clientX)\n        mouseY.set(e.clientY)\n      }\n      else {\n        const parent = ref.current?.parentElement\n        if (!parent)\n          return\n        const rect = parent.getBoundingClientRect()\n        mouseX.set(e.clientX - rect.left)\n        mouseY.set(e.clientY - rect.top)\n      }\n    }\n\n    const target = fixed ? window : (ref.current?.parentElement ?? window)\n    target.addEventListener('mousemove', onMove as EventListener)\n    return () => target.removeEventListener('mousemove', onMove as EventListener)\n  }, [fixed, mouseX, mouseY])\n\n  return (\n    <motion.div\n      ref={ref}\n      className={cn(\n        'pointer-events-none',\n        fixed ? 'fixed inset-0 z-[9998]' : 'absolute inset-0',\n        className,\n      )}\n      style={{ background }}\n    />\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

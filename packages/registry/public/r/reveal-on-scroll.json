@@ -1,0 +1,20 @@
+{
+  "name": "reveal-on-scroll",
+  "type": "registry:component",
+  "title": "Reveal On Scroll",
+  "description": "Wrapper that fades and slides children in when scrolled into view.",
+  "dependencies": [
+    "motion"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "reveal-on-scroll.tsx",
+      "content": "'use client'\n\nimport { motion } from 'motion/react'\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nconst DIRECTION_OFFSET = {\n  up: { y: 32, x: 0 },\n  down: { y: -32, x: 0 },\n  left: { x: 32, y: 0 },\n  right: { x: -32, y: 0 },\n  none: { x: 0, y: 0 },\n}\n\nexport interface RevealOnScrollProps {\n  children: React.ReactNode\n  className?: string\n  direction?: keyof typeof DIRECTION_OFFSET\n  distance?: number\n  duration?: number\n  delay?: number\n  once?: boolean\n}\n\nexport function RevealOnScroll({\n  children,\n  className,\n  direction = 'up',\n  distance = 32,\n  duration = 0.6,\n  delay = 0,\n  once = true,\n}: RevealOnScrollProps) {\n  const [inView, setInView] = React.useState(false)\n  const [hasAnimated, setHasAnimated] = React.useState(false)\n  const ref = React.useRef<HTMLDivElement>(null)\n\n  const base = DIRECTION_OFFSET[direction]\n  const scale = distance / 32\n  const hidden = {\n    x: base.x * scale,\n    y: base.y * scale,\n    opacity: 0,\n  }\n\n  React.useEffect(() => {\n    const el = ref.current\n    if (!el)\n      return\n    const observer = new IntersectionObserver(\n      ([entry]) => {\n        if (entry.isIntersecting && !(once && hasAnimated)) {\n          setInView(true)\n          if (once)\n            setHasAnimated(true)\n        }\n        else if (!once) {\n          setInView(entry.isIntersecting)\n        }\n      },\n      { threshold: 0.1 },\n    )\n    observer.observe(el)\n    return () => observer.disconnect()\n  }, [once, hasAnimated])\n\n  return (\n    <motion.div\n      ref={ref}\n      className={cn(className)}\n      initial={hidden}\n      animate={inView ? { x: 0, y: 0, opacity: 1 } : hidden}\n      transition={{ duration, delay, ease: [0.21, 0.47, 0.32, 0.98] }}\n    >\n      {children}\n    </motion.div>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

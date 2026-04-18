@@ -7,7 +7,9 @@ import { getRegistryIndex, getRegistryItem } from '@/lib/registry'
 
 export async function generateStaticParams() {
   const index = await getRegistryIndex()
-  return index.items.map(item => ({ name: item.name }))
+  return index.items
+    .filter(item => item.type !== 'registry:block')
+    .map(item => ({ name: item.name }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ name: string }> }) {
@@ -29,7 +31,7 @@ export default async function ComponentPage({
   const { name } = await params
   const item = await getRegistryItem(name)
 
-  if (!item) {
+  if (!item || item.type === 'registry:block') {
     notFound()
   }
 

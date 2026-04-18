@@ -1,0 +1,18 @@
+{
+  "name": "dot-grid",
+  "type": "registry:component",
+  "title": "Dot Grid",
+  "description": "Interactive canvas dot grid — dots scale up near the cursor.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "dot-grid.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface DotGridProps {\n  className?: string\n  dotColor?: string\n  dotSize?: number\n  gap?: number\n  radius?: number\n  maxScale?: number\n}\n\nexport function DotGrid({\n  className,\n  dotColor = '#a78bfa',\n  dotSize = 2,\n  gap = 24,\n  radius = 90,\n  maxScale = 3.5,\n}: DotGridProps) {\n  const canvasRef = React.useRef<HTMLCanvasElement>(null)\n  const mouseRef = React.useRef({ x: -9999, y: -9999 })\n  const frameRef = React.useRef<number>(0)\n\n  React.useEffect(() => {\n    const canvas = canvasRef.current\n    if (!canvas)\n      return\n    const ctx = canvas.getContext('2d')\n    if (!ctx)\n      return\n\n    const resize = () => {\n      canvas.width = canvas.offsetWidth\n      canvas.height = canvas.offsetHeight\n    }\n    resize()\n\n    const onMove = (e: MouseEvent) => {\n      const r = canvas.getBoundingClientRect()\n      mouseRef.current = { x: e.clientX - r.left, y: e.clientY - r.top }\n    }\n    const onLeave = () => {\n      mouseRef.current = { x: -9999, y: -9999 }\n    }\n\n    canvas.addEventListener('mousemove', onMove)\n    canvas.addEventListener('mouseleave', onLeave)\n    window.addEventListener('resize', resize)\n\n    // Parse hex to rgb string (handles 6-digit hex)\n    const hexToRgb = (hex: string) => {\n      const clean = hex.replace('#', '')\n      const r = parseInt(clean.slice(0, 2), 16)\n      const g = parseInt(clean.slice(2, 4), 16)\n      const b = parseInt(clean.slice(4, 6), 16)\n      return `${r},${g},${b}`\n    }\n    const rgb = dotColor.startsWith('#') ? hexToRgb(dotColor) : '167,139,250'\n\n    const draw = () => {\n      ctx.clearRect(0, 0, canvas.width, canvas.height)\n      const mx = mouseRef.current.x\n      const my = mouseRef.current.y\n      const cols = Math.ceil(canvas.width / gap) + 1\n      const rows = Math.ceil(canvas.height / gap) + 1\n\n      for (let r = 0; r < rows; r++) {\n        for (let c = 0; c < cols; c++) {\n          const x = c * gap\n          const y = r * gap\n          const dist = Math.hypot(x - mx, y - my)\n          const influence = Math.max(0, 1 - dist / radius)\n          const scale = 1 + (maxScale - 1) * influence\n          const opacity = 0.15 + influence * 0.7\n\n          ctx.beginPath()\n          ctx.arc(x, y, dotSize * scale, 0, Math.PI * 2)\n          ctx.fillStyle = `rgba(${rgb},${opacity})`\n          ctx.fill()\n        }\n      }\n\n      frameRef.current = requestAnimationFrame(draw)\n    }\n\n    draw()\n    return () => {\n      cancelAnimationFrame(frameRef.current)\n      canvas.removeEventListener('mousemove', onMove)\n      canvas.removeEventListener('mouseleave', onLeave)\n      window.removeEventListener('resize', resize)\n    }\n  }, [dotColor, dotSize, gap, radius, maxScale])\n\n  return (\n    <canvas\n      ref={canvasRef}\n      className={cn('block h-full w-full', className)}\n    />\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

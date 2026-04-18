@@ -21,11 +21,11 @@
   "keywords": ["cli", "components", "shadcn", "tailwind", "react", "ui", "copy-paste", "registry"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/component-library-cli.git",
+    "url": "https://github.com/azkriven16/eugui.git",
     "directory": "packages/cli"
   },
-  "homepage": "https://github.com/YOUR_USERNAME/component-library-cli#readme",
-  "bugs": "https://github.com/YOUR_USERNAME/component-library-cli/issues",
+  "homepage": "https://github.com/azkriven16/eugui#readme",
+  "bugs": "https://github.com/azkriven16/eugui/issues",
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",

@@ -1,0 +1,18 @@
+{
+  "name": "aurora-bg",
+  "type": "registry:component",
+  "title": "Aurora Background",
+  "description": "Canvas-based animated northern lights with blending color blobs.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "aurora-bg.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface AuroraBgProps {\n  className?: string\n  children?: React.ReactNode\n  colors?: string[]\n  blur?: number\n  speed?: number\n}\n\ninterface Blob {\n  x: number\n  y: number\n  vx: number\n  vy: number\n  r: number\n  color: string\n}\n\nexport function AuroraBg({\n  className,\n  children,\n  colors = ['#a855f7', '#6366f1', '#3b82f6', '#10b981'],\n  blur = 80,\n  speed = 1,\n}: AuroraBgProps) {\n  const canvasRef = React.useRef<HTMLCanvasElement>(null)\n  const frameRef = React.useRef<number>(0)\n\n  React.useEffect(() => {\n    const canvas = canvasRef.current\n    if (!canvas)\n      return\n    const ctx = canvas.getContext('2d')\n    if (!ctx)\n      return\n\n    let blobs: Blob[] = []\n\n    const resize = () => {\n      canvas.width = canvas.offsetWidth\n      canvas.height = canvas.offsetHeight\n      blobs = colors.map((color, i) => ({\n        x: (canvas.width / colors.length) * i + (canvas.width / colors.length) * 0.5,\n        y: canvas.height * 0.5 + (Math.random() - 0.5) * canvas.height * 0.4,\n        vx: (Math.random() - 0.5) * speed * 0.6,\n        vy: (Math.random() - 0.5) * speed * 0.4,\n        r: Math.min(canvas.width, canvas.height) * (0.35 + Math.random() * 0.2),\n        color,\n      }))\n    }\n\n    resize()\n\n    const draw = () => {\n      ctx.clearRect(0, 0, canvas.width, canvas.height)\n\n      for (const b of blobs) {\n        b.x += b.vx\n        b.y += b.vy\n        if (b.x < -b.r / 2)\n          b.vx = Math.abs(b.vx)\n        if (b.x > canvas.width + b.r / 2)\n          b.vx = -Math.abs(b.vx)\n        if (b.y < -b.r / 2)\n          b.vy = Math.abs(b.vy)\n        if (b.y > canvas.height + b.r / 2)\n          b.vy = -Math.abs(b.vy)\n\n        ctx.globalCompositeOperation = 'screen'\n        const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r)\n        grad.addColorStop(0, `${b.color}bb`)\n        grad.addColorStop(0.5, `${b.color}44`)\n        grad.addColorStop(1, `${b.color}00`)\n        ctx.fillStyle = grad\n        ctx.beginPath()\n        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2)\n        ctx.fill()\n      }\n\n      ctx.globalCompositeOperation = 'source-over'\n      frameRef.current = requestAnimationFrame(draw)\n    }\n\n    draw()\n    window.addEventListener('resize', resize)\n    return () => {\n      cancelAnimationFrame(frameRef.current)\n      window.removeEventListener('resize', resize)\n    }\n  }, [colors, speed])\n\n  return (\n    <div className={cn('relative overflow-hidden', className)}>\n      <canvas\n        ref={canvasRef}\n        className=\"absolute inset-0 h-full w-full scale-110\"\n        style={{ filter: `blur(${blur}px)` }}\n      />\n      {children && <div className=\"relative z-10\">{children}</div>}\n    </div>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

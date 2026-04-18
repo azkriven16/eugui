@@ -19,15 +19,18 @@ export function MorphingText({
   const [visible, setVisible] = React.useState(true)
 
   React.useEffect(() => {
+    let t: ReturnType<typeof setTimeout>
     const interval = setInterval(() => {
       setVisible(false)
-      const t = setTimeout(() => {
+      t = setTimeout(() => {
         setIndex(i => (i + 1) % words.length)
         setVisible(true)
       }, 350)
-      return () => clearTimeout(t)
     }, duration)
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      clearTimeout(t)
+    }
   }, [words.length, duration])
 
   return (

@@ -1,0 +1,18 @@
+{
+  "name": "count-up",
+  "type": "registry:component",
+  "title": "Count Up",
+  "description": "Animated number counter that triggers when scrolled into view.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "count-up.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface CountUpProps {\n  end: number\n  start?: number\n  duration?: number\n  prefix?: string\n  suffix?: string\n  decimals?: number\n  className?: string\n  once?: boolean\n}\n\nfunction easeOutCubic(t: number) {\n  return 1 - (1 - t) ** 3\n}\n\nexport function CountUp({\n  end,\n  start = 0,\n  duration = 2000,\n  prefix = '',\n  suffix = '',\n  decimals = 0,\n  className,\n  once = true,\n}: CountUpProps) {\n  const [value, setValue] = React.useState(start)\n  const [hasAnimated, setHasAnimated] = React.useState(false)\n  const ref = React.useRef<HTMLSpanElement>(null)\n\n  React.useEffect(() => {\n    const el = ref.current\n    if (!el)\n      return\n\n    const observer = new IntersectionObserver(\n      ([entry]) => {\n        if (entry.isIntersecting && !(once && hasAnimated)) {\n          const startTime = performance.now()\n          const tick = (now: number) => {\n            const elapsed = now - startTime\n            const progress = Math.min(elapsed / duration, 1)\n            setValue(start + (end - start) * easeOutCubic(progress))\n            if (progress < 1) {\n              requestAnimationFrame(tick)\n            }\n            else {\n              setValue(end)\n              if (once)\n                setHasAnimated(true)\n            }\n          }\n          requestAnimationFrame(tick)\n        }\n      },\n      { threshold: 0.3 },\n    )\n\n    observer.observe(el)\n    return () => observer.disconnect()\n  }, [end, start, duration, once, hasAnimated])\n\n  return (\n    <span ref={ref} className={cn('tabular-nums', className)}>\n      {prefix}\n      {value.toFixed(decimals)}\n      {suffix}\n    </span>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

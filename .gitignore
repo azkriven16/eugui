@@ -9,3 +9,8 @@ pnpm-debug.log*
 # Next.js
 .next/
 .vercel/
+
+# Claude / AI
+.claude/
+agents/
+docs/

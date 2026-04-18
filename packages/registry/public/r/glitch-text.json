@@ -1,0 +1,18 @@
+{
+  "name": "glitch-text",
+  "type": "registry:component",
+  "title": "Glitch Text",
+  "description": "Text with an RGB-split glitch animation effect.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "glitch-text.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface GlitchTextProps {\n  children: string\n  className?: string\n  speed?: 'slow' | 'normal' | 'fast'\n  color1?: string\n  color2?: string\n}\n\nexport function GlitchText({\n  children,\n  className,\n  speed = 'normal',\n  color1 = '#ff2020',\n  color2 = '#2060ff',\n}: GlitchTextProps) {\n  const uid = React.useId().replace(/:/g, '')\n  const dur = speed === 'fast' ? '1.5s' : speed === 'slow' ? '5s' : '3s'\n\n  return (\n    <>\n      <style>{`\n        .glitch-${uid} {\n          position: relative;\n          display: inline-block;\n        }\n        .glitch-${uid}::before,\n        .glitch-${uid}::after {\n          content: attr(data-text);\n          position: absolute;\n          inset: 0;\n          overflow: hidden;\n        }\n        .glitch-${uid}::before {\n          color: ${color1};\n          animation: glitch-a-${uid} ${dur} infinite steps(1);\n          clip-path: inset(0 0 80% 0);\n        }\n        .glitch-${uid}::after {\n          color: ${color2};\n          animation: glitch-b-${uid} ${dur} infinite steps(1);\n          clip-path: inset(60% 0 0 0);\n        }\n        @keyframes glitch-a-${uid} {\n          0%,89%,100% { transform:translate(0);      clip-path:inset(0 0 80% 0); }\n          90%          { transform:translate(-4px,2px);  clip-path:inset(5% 0 72% 0); }\n          92%          { transform:translate(4px,-1px);  clip-path:inset(15% 0 65% 0); }\n          94%          { transform:translate(-2px,3px);  clip-path:inset(2% 0 78% 0); }\n          96%          { transform:translate(3px,0);     clip-path:inset(20% 0 58% 0); }\n          98%          { transform:translate(-3px,-2px); clip-path:inset(0 0 82% 0); }\n        }\n        @keyframes glitch-b-${uid} {\n          0%,89%,100% { transform:translate(0);      clip-path:inset(60% 0 0 0); }\n          91%          { transform:translate(4px,1px);   clip-path:inset(72% 0 5% 0); }\n          93%          { transform:translate(-3px,-2px); clip-path:inset(55% 0 15% 0); }\n          95%          { transform:translate(2px,2px);   clip-path:inset(68% 0 2% 0); }\n          97%          { transform:translate(-4px,0);    clip-path:inset(75% 0 0 0); }\n          99%          { transform:translate(1px,-1px);  clip-path:inset(60% 0 8% 0); }\n        }\n      `}</style>\n      <span\n        className={cn('glitch-' + uid, className)}\n        data-text={children}\n      >\n        {children}\n      </span>\n    </>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

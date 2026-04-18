@@ -1,0 +1,18 @@
+{
+  "name": "contact-section",
+  "type": "registry:block",
+  "title": "Contact Section",
+  "description": "Minimal contact section with email CTA and social links.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "contact-section.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface ContactLink {\n  label: string\n  href: string\n  external?: boolean\n}\n\nexport interface ContactSectionProps {\n  heading?: string\n  subheading?: string\n  email: string\n  links?: ContactLink[]\n  className?: string\n}\n\nexport function ContactSection({\n  heading = \"Let's work together\",\n  subheading = \"Have a project in mind? I'd love to hear about it.\",\n  email,\n  links = [],\n  className,\n}: ContactSectionProps) {\n  return (\n    <section className={cn('bg-zinc-950 px-4 py-24', className)}>\n      <div className=\"mx-auto max-w-2xl text-center\">\n        <h2 className=\"mb-4 text-3xl font-semibold tracking-tight text-zinc-50 sm:text-4xl\">\n          {heading}\n        </h2>\n        <p className=\"mb-10 text-zinc-500\">{subheading}</p>\n\n        <a\n          href={`mailto:${email}`}\n          className=\"inline-flex items-center gap-2 rounded-full bg-violet-600 px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-violet-500\"\n        >\n          {email}\n          {' →'}\n        </a>\n\n        {links.length > 0 && (\n          <div className=\"mt-8 flex flex-wrap items-center justify-center gap-4\">\n            {links.map(({ label, href, external }) => (\n              <a\n                key={label}\n                href={href}\n                target={external ? '_blank' : undefined}\n                rel={external ? 'noopener noreferrer' : undefined}\n                className=\"text-sm text-zinc-500 transition-colors hover:text-zinc-300\"\n              >\n                {label}\n              </a>\n            ))}\n          </div>\n        )}\n      </div>\n    </section>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

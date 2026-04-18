@@ -1,0 +1,20 @@
+{
+  "name": "spotlight-card",
+  "type": "registry:component",
+  "title": "Spotlight Card",
+  "description": "Card with a radial spotlight that follows the cursor on hover.",
+  "dependencies": [
+    "motion"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "spotlight-card.tsx",
+      "content": "'use client'\n\nimport { motion, useMotionTemplate, useMotionValue } from 'motion/react'\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface SpotlightCardProps {\n  children: React.ReactNode\n  className?: string\n  spotlightColor?: string\n  spotlightSize?: number\n}\n\nexport function SpotlightCard({\n  children,\n  className,\n  spotlightColor = 'rgba(167, 139, 250, 0.15)',\n  spotlightSize = 300,\n}: SpotlightCardProps) {\n  const mouseX = useMotionValue(-9999)\n  const mouseY = useMotionValue(-9999)\n  const ref = React.useRef<HTMLDivElement>(null)\n\n  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {\n    if (!ref.current)\n      return\n    const rect = ref.current.getBoundingClientRect()\n    mouseX.set(e.clientX - rect.left)\n    mouseY.set(e.clientY - rect.top)\n  }\n\n  function handleMouseLeave() {\n    mouseX.set(-9999)\n    mouseY.set(-9999)\n  }\n\n  const background = useMotionTemplate`radial-gradient(${spotlightSize}px circle at ${mouseX}px ${mouseY}px, ${spotlightColor}, transparent 80%)`\n\n  return (\n    <div\n      ref={ref}\n      onMouseMove={handleMouseMove}\n      onMouseLeave={handleMouseLeave}\n      className={cn(\n        'group relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900',\n        className,\n      )}\n    >\n      <motion.div\n        className=\"pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100\"\n        style={{ background }}\n      />\n      <div className=\"relative z-10\">{children}</div>\n    </div>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

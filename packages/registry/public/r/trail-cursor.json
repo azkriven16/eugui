@@ -1,0 +1,18 @@
+{
+  "name": "trail-cursor",
+  "type": "registry:component",
+  "title": "Trail Cursor",
+  "description": "Canvas particle trail that follows the cursor.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "trail-cursor.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface TrailCursorProps {\n  className?: string\n  color?: string\n  size?: number\n  length?: number\n  fixed?: boolean\n}\n\nexport function TrailCursor({\n  className,\n  color = '#a78bfa',\n  size = 7,\n  length = 22,\n  fixed = true,\n}: TrailCursorProps) {\n  const canvasRef = React.useRef<HTMLCanvasElement>(null)\n  const pointsRef = React.useRef<Array<{ x: number, y: number }>>([])\n  const frameRef = React.useRef<number>(0)\n\n  React.useEffect(() => {\n    const canvas = canvasRef.current\n    if (!canvas)\n      return\n    const ctx = canvas.getContext('2d')\n    if (!ctx)\n      return\n\n    const resize = () => {\n      const parent = canvas.parentElement\n      canvas.width = fixed ? window.innerWidth : (parent?.offsetWidth ?? window.innerWidth)\n      canvas.height = fixed ? window.innerHeight : (parent?.offsetHeight ?? window.innerHeight)\n    }\n    resize()\n\n    const onMove = (e: MouseEvent) => {\n      if (fixed) {\n        pointsRef.current.push({ x: e.clientX, y: e.clientY })\n      }\n      else {\n        const rect = canvas.getBoundingClientRect()\n        pointsRef.current.push({ x: e.clientX - rect.left, y: e.clientY - rect.top })\n      }\n      if (pointsRef.current.length > length)\n        pointsRef.current.shift()\n    }\n\n    const draw = () => {\n      ctx.clearRect(0, 0, canvas.width, canvas.height)\n      const pts = pointsRef.current\n      for (let i = 0; i < pts.length; i++) {\n        const t = (i + 1) / pts.length\n        const r = Math.max(1, size * t)\n        const alpha = t * 0.75\n        const hex = Math.round(alpha * 255).toString(16).padStart(2, '0')\n        ctx.beginPath()\n        ctx.arc(pts[i].x, pts[i].y, r, 0, Math.PI * 2)\n        ctx.fillStyle = `${color}${hex}`\n        ctx.fill()\n      }\n      frameRef.current = requestAnimationFrame(draw)\n    }\n\n    const target = fixed ? window : (canvas.parentElement ?? canvas)\n    target.addEventListener('mousemove', onMove as EventListener)\n    window.addEventListener('resize', resize)\n    draw()\n\n    return () => {\n      cancelAnimationFrame(frameRef.current)\n      target.removeEventListener('mousemove', onMove as EventListener)\n      window.removeEventListener('resize', resize)\n    }\n  }, [color, size, length, fixed])\n\n  return (\n    <canvas\n      ref={canvasRef}\n      className={cn(\n        'pointer-events-none',\n        fixed ? 'fixed inset-0 z-[9999]' : 'absolute inset-0 h-full w-full',\n        className,\n      )}\n    />\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

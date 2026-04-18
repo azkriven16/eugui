@@ -1,0 +1,18 @@
+{
+  "name": "gradient-mesh",
+  "type": "registry:component",
+  "title": "Gradient Mesh",
+  "description": "Animated soft color mesh background with drifting radial blobs.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "gradient-mesh.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface GradientMeshProps {\n  className?: string\n  colors?: [string, string, string, string]\n  speed?: number\n  children?: React.ReactNode\n}\n\nexport function GradientMesh({\n  className,\n  colors = ['#a78bfa', '#60a5fa', '#34d399', '#f472b6'],\n  speed = 1,\n  children,\n}: GradientMeshProps) {\n  const uid = React.useId().replace(/:/g, '')\n  const dur = `${12 / speed}s`\n\n  return (\n    <>\n      <style>{`\n        .gm-${uid} {\n          position: relative;\n          overflow: hidden;\n        }\n        .gm-${uid}::before {\n          content: '';\n          position: absolute;\n          inset: -60%;\n          background:\n            radial-gradient(ellipse at 20% 20%, ${colors[0]}50, transparent 55%),\n            radial-gradient(ellipse at 80% 15%, ${colors[1]}50, transparent 55%),\n            radial-gradient(ellipse at 15% 80%, ${colors[2]}50, transparent 55%),\n            radial-gradient(ellipse at 80% 80%, ${colors[3]}50, transparent 55%);\n          animation: gm-drift-${uid} ${dur} ease-in-out infinite alternate;\n        }\n        @keyframes gm-drift-${uid} {\n          0%   { transform: translate(0%, 0%)    rotate(0deg); }\n          33%  { transform: translate(4%, -4%)   rotate(1.5deg); }\n          66%  { transform: translate(-4%, 4%)   rotate(-1.5deg); }\n          100% { transform: translate(3%, -3%)   rotate(1deg); }\n        }\n      `}</style>\n      <div className={cn('gm-' + uid, className)}>\n        {children && <div className=\"relative z-10\">{children}</div>}\n      </div>\n    </>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

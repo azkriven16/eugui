@@ -132,7 +132,7 @@ export async function runInit(cwd: string): Promise<void> {
       hooks: '@/hooks',
     },
     registries: {
-      default: 'https://ui.shadcn.com/r',
+      default: 'https://eugui.dev/r',
     },
   }
 

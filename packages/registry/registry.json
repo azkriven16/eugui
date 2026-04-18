@@ -86,6 +86,390 @@
       "files": [
         { "path": "morphing-text.tsx", "type": "component" }
       ]
+    },
+    {
+      "name": "glitch-text",
+      "type": "registry:component",
+      "title": "Glitch Text",
+      "description": "Text with an RGB-split glitch animation effect.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "glitch-text.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "typewriter-text",
+      "type": "registry:component",
+      "title": "Typewriter Text",
+      "description": "Text that types and deletes itself with a blinking cursor.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "typewriter-text.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "count-up",
+      "type": "registry:component",
+      "title": "Count Up",
+      "description": "Animated number counter that triggers when scrolled into view.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "count-up.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "gradient-text",
+      "type": "registry:component",
+      "title": "Gradient Text",
+      "description": "Text with a flowing animated color gradient.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "gradient-text.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "glass-card",
+      "type": "registry:component",
+      "title": "Glass Card",
+      "description": "Frosted glass card with backdrop blur and translucent border.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "glass-card.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "gradient-mesh",
+      "type": "registry:component",
+      "title": "Gradient Mesh",
+      "description": "Animated soft color mesh background with drifting radial blobs.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "gradient-mesh.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "split-text",
+      "type": "registry:component",
+      "title": "Split Text",
+      "description": "Text that animates in character-by-character or word-by-word with stagger.",
+      "dependencies": ["motion"],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "split-text.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "spotlight-card",
+      "type": "registry:component",
+      "title": "Spotlight Card",
+      "description": "Card with a radial spotlight that follows the cursor on hover.",
+      "dependencies": ["motion"],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "spotlight-card.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "aurora-bg",
+      "type": "registry:component",
+      "title": "Aurora Background",
+      "description": "Canvas-based animated northern lights with blending color blobs.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "aurora-bg.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "dot-grid",
+      "type": "registry:component",
+      "title": "Dot Grid",
+      "description": "Interactive canvas dot grid — dots scale up near the cursor.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "dot-grid.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "gradient-border",
+      "type": "registry:component",
+      "title": "Gradient Border",
+      "description": "Animated rotating gradient border that wraps any element.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "gradient-border.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "trail-cursor",
+      "type": "registry:component",
+      "title": "Trail Cursor",
+      "description": "Canvas particle trail that follows the cursor.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "trail-cursor.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "spotlight-cursor",
+      "type": "registry:component",
+      "title": "Spotlight Cursor",
+      "description": "Full-page radial spotlight that smoothly follows the cursor.",
+      "dependencies": ["motion"],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "spotlight-cursor.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "blob-cursor",
+      "type": "registry:component",
+      "title": "Blob Cursor",
+      "description": "Morphing blob that follows the cursor with spring-based lag.",
+      "dependencies": ["motion"],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "blob-cursor.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "reveal-on-scroll",
+      "type": "registry:component",
+      "title": "Reveal On Scroll",
+      "description": "Wrapper that fades and slides children in when scrolled into view.",
+      "dependencies": ["motion"],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "reveal-on-scroll.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "staggered-list",
+      "type": "registry:component",
+      "title": "Staggered List",
+      "description": "List where each child animates in with a stagger delay on scroll.",
+      "dependencies": ["motion"],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "staggered-list.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "scroll-progress",
+      "type": "registry:component",
+      "title": "Scroll Progress",
+      "description": "Fixed reading progress bar at the top of the page.",
+      "dependencies": ["motion"],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "scroll-progress.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "parallax-layer",
+      "type": "registry:component",
+      "title": "Parallax Layer",
+      "description": "Wraps content that moves at a different speed during scroll.",
+      "dependencies": ["motion"],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "parallax-layer.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "project-card",
+      "type": "registry:component",
+      "title": "Project Card",
+      "description": "Portfolio project card with image, tags, and live/repo links.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "project-card.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "timeline-item",
+      "type": "registry:component",
+      "title": "Timeline Item",
+      "description": "Experience or education entry with dot connector for timeline sections.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "timeline-item.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "skill-bar",
+      "type": "registry:component",
+      "title": "Skill Bar",
+      "description": "Animated progress bar for skill levels, triggers on scroll.",
+      "dependencies": ["motion"],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "skill-bar.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "stat-counter",
+      "type": "registry:component",
+      "title": "Stat Counter",
+      "description": "Animated count-up stat with a label for stats sections.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "stat-counter.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "profile-card",
+      "type": "registry:component",
+      "title": "Profile Card",
+      "description": "Avatar, name, role, bio, and social links card.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "profile-card.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "tech-badge",
+      "type": "registry:component",
+      "title": "Tech Badge",
+      "description": "Compact badge for displaying a technology or skill.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "tech-badge.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "review-card",
+      "type": "registry:component",
+      "title": "Review Card",
+      "description": "Testimonial card with quote, star rating, and author attribution.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "review-card.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "hero-minimal",
+      "type": "registry:block",
+      "title": "Hero Minimal",
+      "description": "Clean centered hero section with name, role, bio, CTAs, and social links.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "hero-minimal.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "hero-bold",
+      "type": "registry:block",
+      "title": "Hero Bold",
+      "description": "Full-bleed hero with an animated aurora canvas background.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "hero-bold.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "about-section",
+      "type": "registry:block",
+      "title": "About Section",
+      "description": "Two-column about section with avatar, bio paragraphs, tech badges, and links.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "about-section.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "projects-grid",
+      "type": "registry:block",
+      "title": "Projects Grid",
+      "description": "Responsive grid of project cards with images, tags, and live/repo links.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "projects-grid.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "skills-section",
+      "type": "registry:block",
+      "title": "Skills Section",
+      "description": "Categorized skill badges in animated cards, scroll-triggered reveal.",
+      "dependencies": ["motion"],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "skills-section.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "stats-row",
+      "type": "registry:block",
+      "title": "Stats Row",
+      "description": "Row of animated count-up stats that trigger on scroll.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "stats-row.tsx", "type": "component" }
+      ]
+    },
+    {
+      "name": "contact-section",
+      "type": "registry:block",
+      "title": "Contact Section",
+      "description": "Minimal contact section with email CTA and social links.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        { "path": "contact-section.tsx", "type": "component" }
+      ]
     }
   ]
 }

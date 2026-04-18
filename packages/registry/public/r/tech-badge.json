@@ -1,0 +1,18 @@
+{
+  "name": "tech-badge",
+  "type": "registry:component",
+  "title": "Tech Badge",
+  "description": "Compact badge for displaying a technology or skill.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "tech-badge.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nconst VARIANT_STYLES = {\n  default: 'bg-zinc-800/80 border border-zinc-700/60 text-zinc-300 hover:border-zinc-600',\n  outline: 'border border-zinc-700 text-zinc-400 hover:border-violet-500/50 hover:text-violet-300',\n  filled: 'bg-violet-600/20 border border-violet-500/30 text-violet-300 hover:bg-violet-600/30',\n} as const\n\nexport interface TechBadgeProps {\n  name: string\n  icon?: React.ReactNode\n  variant?: keyof typeof VARIANT_STYLES\n  className?: string\n}\n\nexport function TechBadge({\n  name,\n  icon,\n  variant = 'default',\n  className,\n}: TechBadgeProps) {\n  return (\n    <span\n      className={cn(\n        'inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-sm font-medium transition-colors',\n        VARIANT_STYLES[variant],\n        className,\n      )}\n    >\n      {icon && <span className=\"size-4 shrink-0 leading-none\">{icon}</span>}\n      {name}\n    </span>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

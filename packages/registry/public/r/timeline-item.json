@@ -1,0 +1,18 @@
+{
+  "name": "timeline-item",
+  "type": "registry:component",
+  "title": "Timeline Item",
+  "description": "Experience or education entry with dot connector for timeline sections.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "timeline-item.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface TimelineItemProps {\n  date: string\n  title: string\n  company?: string\n  description?: string\n  type?: 'work' | 'education' | 'project'\n  current?: boolean\n  last?: boolean\n  className?: string\n}\n\nconst TYPE_DOT: Record<string, string> = {\n  work: 'bg-violet-500',\n  education: 'bg-blue-500',\n  project: 'bg-emerald-500',\n}\n\nexport function TimelineItem({\n  date,\n  title,\n  company,\n  description,\n  type = 'work',\n  current = false,\n  last = false,\n  className,\n}: TimelineItemProps) {\n  return (\n    <div className={cn('relative flex gap-5', className)}>\n      <div className=\"flex flex-col items-center\">\n        <div\n          className={cn(\n            'mt-1 size-3 shrink-0 rounded-full ring-4 ring-zinc-950',\n            TYPE_DOT[type] ?? 'bg-zinc-500',\n            current && 'ring-2 ring-violet-400/40 ring-offset-1 ring-offset-zinc-950',\n          )}\n        />\n        {!last && <div className=\"mt-1.5 w-px flex-1 bg-zinc-800\" />}\n      </div>\n      <div className={cn('min-w-0 flex-1', last ? 'pb-0' : 'pb-8')}>\n        <time className=\"text-xs font-medium text-zinc-500\">{date}</time>\n        <h3 className=\"mt-0.5 font-semibold text-zinc-100\">{title}</h3>\n        {company && <p className=\"text-sm text-zinc-400\">{company}</p>}\n        {description && (\n          <p className=\"mt-2 text-sm leading-relaxed text-zinc-500\">{description}</p>\n        )}\n      </div>\n    </div>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

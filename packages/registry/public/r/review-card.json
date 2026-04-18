@@ -1,0 +1,18 @@
+{
+  "name": "review-card",
+  "type": "registry:component",
+  "title": "Review Card",
+  "description": "Testimonial card with quote, star rating, and author attribution.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "review-card.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface ReviewCardProps {\n  quote: string\n  name: string\n  role?: string\n  company?: string\n  avatar?: string\n  rating?: number\n  className?: string\n}\n\nexport function ReviewCard({\n  quote,\n  name,\n  role,\n  company,\n  avatar,\n  rating,\n  className,\n}: ReviewCardProps) {\n  const initials = name\n    .split(' ')\n    .map(n => n[0])\n    .join('')\n    .slice(0, 2)\n    .toUpperCase()\n\n  return (\n    <div\n      className={cn(\n        'flex flex-col gap-4 rounded-xl border border-zinc-800 bg-zinc-900 p-6',\n        className,\n      )}\n    >\n      {rating !== undefined && (\n        <div className=\"flex gap-0.5\">\n          {Array.from({ length: 5 }).map((_, i) => (\n            <span\n              key={i}\n              className={i < rating ? 'text-yellow-400' : 'text-zinc-700'}\n              aria-hidden\n            >\n              ★\n            </span>\n          ))}\n        </div>\n      )}\n      <blockquote className=\"text-sm leading-relaxed text-zinc-400\">\n        &ldquo;\n        {quote}\n        &rdquo;\n      </blockquote>\n      <div className=\"flex items-center gap-3\">\n        <div className=\"size-9 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-violet-600 to-blue-600\">\n          {avatar\n            ? (\n                <img src={avatar} alt={name} className=\"h-full w-full object-cover\" />\n              )\n            : (\n                <span className=\"flex h-full w-full items-center justify-center text-xs font-bold text-white\">\n                  {initials}\n                </span>\n              )}\n        </div>\n        <div>\n          <p className=\"text-sm font-semibold text-zinc-200\">{name}</p>\n          {(role || company) && (\n            <p className=\"text-xs text-zinc-500\">\n              {[role, company].filter(Boolean).join(' · ')}\n            </p>\n          )}\n        </div>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "gradient-text",
+  "type": "registry:component",
+  "title": "Gradient Text",
+  "description": "Text with a flowing animated color gradient.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "gradient-text.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface GradientTextProps {\n  children: React.ReactNode\n  className?: string\n  colors?: string[]\n  duration?: number\n  as?: React.ElementType\n}\n\nexport function GradientText({\n  children,\n  className,\n  colors = ['#a78bfa', '#60a5fa', '#34d399', '#f472b6', '#a78bfa'],\n  duration = 4,\n  as: Tag = 'span',\n}: GradientTextProps) {\n  const uid = React.useId().replace(/:/g, '')\n\n  return (\n    <>\n      <style>{`\n        .gt-${uid} {\n          background: linear-gradient(90deg, ${colors.join(', ')});\n          background-size: 200% auto;\n          -webkit-background-clip: text;\n          -webkit-text-fill-color: transparent;\n          background-clip: text;\n          animation: gt-shift-${uid} ${duration}s linear infinite;\n        }\n        @keyframes gt-shift-${uid} {\n          0%   { background-position: 0% center; }\n          100% { background-position: 200% center; }\n        }\n      `}</style>\n      <Tag className={cn('gt-' + uid, className)}>\n        {children}\n      </Tag>\n    </>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

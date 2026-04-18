@@ -1,0 +1,20 @@
+{
+  "name": "blob-cursor",
+  "type": "registry:component",
+  "title": "Blob Cursor",
+  "description": "Morphing blob that follows the cursor with spring-based lag.",
+  "dependencies": [
+    "motion"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "blob-cursor.tsx",
+      "content": "'use client'\n\nimport { motion, useMotionValue, useSpring } from 'motion/react'\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface BlobCursorProps {\n  className?: string\n  color?: string\n  size?: number\n  fixed?: boolean\n}\n\nexport function BlobCursor({\n  className,\n  color = '#a78bfa',\n  size = 44,\n  fixed = true,\n}: BlobCursorProps) {\n  const mouseX = useMotionValue(-9999)\n  const mouseY = useMotionValue(-9999)\n  const x = useSpring(mouseX, { damping: 18, stiffness: 180, mass: 0.6 })\n  const y = useSpring(mouseY, { damping: 18, stiffness: 180, mass: 0.6 })\n  const ref = React.useRef<HTMLDivElement>(null)\n  const uid = React.useId().replace(/:/g, '')\n\n  React.useEffect(() => {\n    const onMove = (e: MouseEvent) => {\n      if (fixed) {\n        mouseX.set(e.clientX - size / 2)\n        mouseY.set(e.clientY - size / 2)\n      }\n      else {\n        const parent = ref.current?.parentElement\n        if (!parent)\n          return\n        const rect = parent.getBoundingClientRect()\n        mouseX.set(e.clientX - rect.left - size / 2)\n        mouseY.set(e.clientY - rect.top - size / 2)\n      }\n    }\n\n    const target = fixed ? window : (ref.current?.parentElement ?? window)\n    target.addEventListener('mousemove', onMove as EventListener)\n    return () => target.removeEventListener('mousemove', onMove as EventListener)\n  }, [fixed, mouseX, mouseY, size])\n\n  return (\n    <div\n      ref={ref}\n      className={cn(\n        'pointer-events-none overflow-hidden',\n        fixed ? 'fixed inset-0 z-[9999]' : 'absolute inset-0',\n        className,\n      )}\n    >\n      <style>{`\n        @keyframes blob-morph-${uid} {\n          0%,100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }\n          25%      { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }\n          50%      { border-radius: 50% 60% 30% 70% / 30% 40% 60% 50%; }\n          75%      { border-radius: 40% 60% 50% 30% / 60% 40% 50% 40%; }\n        }\n      `}</style>\n      <motion.div\n        className=\"absolute\"\n        style={{\n          x,\n          y,\n          width: size,\n          height: size,\n          background: `${color}28`,\n          border: `1.5px solid ${color}99`,\n          animation: `blob-morph-${uid} 4s ease-in-out infinite`,\n        }}\n      />\n    </div>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

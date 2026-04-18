@@ -75,11 +75,10 @@ export function AnimatedBeam({
         </linearGradient>
       </defs>
 
-      <path d={pathD} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={2} />
+      <path ref={pathRef} d={pathD} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={2} />
 
       {totalLength > 0 && (
         <path
-          ref={pathRef}
           d={pathD}
           fill="none"
           stroke={`url(#${gradientId})`}

@@ -10,13 +10,14 @@ const TYPE_LABEL: Record<string, string> = {
 
 export default async function ComponentsPage() {
   const index = await getRegistryIndex()
+  const items = index.items.filter(i => i.type !== 'registry:block')
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold text-zinc-50">Components</h1>
         <p className="text-zinc-400">
-          {index.items.length}
+          {items.length}
           {' components · run '}
           <code className="rounded bg-zinc-800 px-1.5 py-0.5 font-mono text-xs text-zinc-300">
             npx eugui@latest init
@@ -26,7 +27,7 @@ export default async function ComponentsPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {index.items.map(item => (
+        {items.map(item => (
           <Link
             key={item.name}
             href={`/components/${item.name}`}

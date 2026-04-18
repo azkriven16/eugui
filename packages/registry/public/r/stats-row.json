@@ -1,0 +1,18 @@
+{
+  "name": "stats-row",
+  "type": "registry:block",
+  "title": "Stats Row",
+  "description": "Row of animated count-up stats that trigger on scroll.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "stats-row.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface Stat {\n  end: number\n  suffix?: string\n  prefix?: string\n  label: string\n  decimals?: number\n}\n\nexport interface StatsRowProps {\n  stats: Stat[]\n  heading?: string\n  className?: string\n}\n\nfunction easeOutCubic(t: number) {\n  return 1 - (1 - t) ** 3\n}\n\nfunction AnimatedStat({ end, suffix = '', prefix = '', label, decimals = 0 }: Stat) {\n  const [value, setValue] = React.useState(0)\n  const [animated, setAnimated] = React.useState(false)\n  const ref = React.useRef<HTMLDivElement>(null)\n\n  React.useEffect(() => {\n    const el = ref.current\n    if (!el)\n      return\n    const observer = new IntersectionObserver(\n      ([entry]) => {\n        if (entry.isIntersecting && !animated) {\n          setAnimated(true)\n          const start = performance.now()\n          const tick = (now: number) => {\n            const t = Math.min((now - start) / 2000, 1)\n            setValue(end * easeOutCubic(t))\n            if (t < 1)\n              requestAnimationFrame(tick)\n            else\n              setValue(end)\n          }\n          requestAnimationFrame(tick)\n        }\n      },\n      { threshold: 0.3 },\n    )\n    observer.observe(el)\n    return () => observer.disconnect()\n  }, [end, animated])\n\n  return (\n    <div ref={ref} className=\"flex flex-col items-center gap-1 text-center\">\n      <span className=\"tabular-nums text-5xl font-bold text-zinc-50\">\n        {prefix}\n        {value.toFixed(decimals)}\n        {suffix}\n      </span>\n      <span className=\"text-sm text-zinc-500\">{label}</span>\n    </div>\n  )\n}\n\nexport function StatsRow({ stats, heading, className }: StatsRowProps) {\n  return (\n    <section className={cn('bg-zinc-950 px-4 py-24', className)}>\n      <div className=\"mx-auto max-w-5xl\">\n        {heading && (\n          <div className=\"mb-12 text-center\">\n            <h2 className=\"text-3xl font-semibold tracking-tight text-zinc-50\">{heading}</h2>\n          </div>\n        )}\n        <div className=\"grid grid-cols-2 gap-10 md:grid-cols-4\">\n          {stats.map((stat, i) => (\n            <AnimatedStat key={i} {...stat} />\n          ))}\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "split-text",
+  "type": "registry:component",
+  "title": "Split Text",
+  "description": "Text that animates in character-by-character or word-by-word with stagger.",
+  "dependencies": [
+    "motion"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "split-text.tsx",
+      "content": "'use client'\n\nimport { motion } from 'motion/react'\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface SplitTextProps {\n  children: string\n  className?: string\n  charClassName?: string\n  delay?: number\n  stagger?: number\n  duration?: number\n  once?: boolean\n  by?: 'char' | 'word'\n}\n\nexport function SplitText({\n  children,\n  className,\n  charClassName,\n  delay = 0,\n  stagger = 0.03,\n  duration = 0.5,\n  once = true,\n  by = 'char',\n}: SplitTextProps) {\n  const [inView, setInView] = React.useState(false)\n  const [hasAnimated, setHasAnimated] = React.useState(false)\n  const ref = React.useRef<HTMLSpanElement>(null)\n\n  React.useEffect(() => {\n    const el = ref.current\n    if (!el)\n      return\n    const observer = new IntersectionObserver(\n      ([entry]) => {\n        if (entry.isIntersecting && !(once && hasAnimated)) {\n          setInView(true)\n          if (once)\n            setHasAnimated(true)\n        }\n        else if (!once) {\n          setInView(entry.isIntersecting)\n        }\n      },\n      { threshold: 0.1 },\n    )\n    observer.observe(el)\n    return () => observer.disconnect()\n  }, [once, hasAnimated])\n\n  const units = by === 'word' ? children.split(' ') : children.split('')\n\n  return (\n    <span ref={ref} className={cn('inline', className)} aria-label={children}>\n      {units.map((unit, i) => (\n        <React.Fragment key={i}>\n          <span className=\"inline-block overflow-hidden\">\n            <motion.span\n              aria-hidden\n              className={cn('inline-block', charClassName)}\n              initial={{ y: '110%', opacity: 0 }}\n              animate={inView ? { y: 0, opacity: 1 } : { y: '110%', opacity: 0 }}\n              transition={{\n                duration,\n                delay: delay + i * stagger,\n                ease: [0.2, 0.65, 0.3, 0.9],\n              }}\n            >\n              {unit === ' ' ? '\\u00A0' : unit}\n            </motion.span>\n          </span>\n          {by === 'word' && i < units.length - 1 && '\\u00A0'}\n        </React.Fragment>\n      ))}\n    </span>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

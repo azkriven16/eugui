@@ -68,7 +68,7 @@ export function Particles({
       return `${r}, ${g}, ${b}`
     }
 
-    const rgb = hexToRgb(color.startsWith('#') ? color : '#8b5cf6')
+    const rgb = /^#[0-9a-f]{6}$/i.test(color) ? hexToRgb(color) : '139, 92, 246'
 
     function draw() {
       if (!canvas || !ctx)

@@ -4,7 +4,7 @@ import { registryItemSchema, registryIndexSchema } from '../schemas/registry'
 import type { RegistryItem, RegistryIndex } from '../schemas/registry'
 import type { ComponentsConfig } from '../schemas/config'
 
-const DEFAULT_REGISTRY = 'https://ui.shadcn.com/r'
+const DEFAULT_REGISTRY = 'https://eugui.dev/r'
 
 /**
  * Resolves a component name/URL to the full fetch URL.

@@ -1,0 +1,18 @@
+{
+  "name": "glass-card",
+  "type": "registry:component",
+  "title": "Glass Card",
+  "description": "Frosted glass card with backdrop blur and translucent border.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "glass-card.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nconst BLUR_MAP = {\n  sm: 'backdrop-blur-sm',\n  md: 'backdrop-blur-md',\n  lg: 'backdrop-blur-lg',\n  xl: 'backdrop-blur-xl',\n} as const\n\nexport interface GlassCardProps {\n  children: React.ReactNode\n  className?: string\n  blur?: keyof typeof BLUR_MAP\n  border?: boolean\n  padding?: boolean\n}\n\nexport function GlassCard({\n  children,\n  className,\n  blur = 'md',\n  border = true,\n  padding = true,\n}: GlassCardProps) {\n  return (\n    <div\n      className={cn(\n        'rounded-xl bg-white/5',\n        BLUR_MAP[blur],\n        border && 'border border-white/10',\n        padding && 'p-6',\n        'shadow-xl shadow-black/20',\n        className,\n      )}\n    >\n      {children}\n    </div>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}

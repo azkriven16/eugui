@@ -1,0 +1,18 @@
+{
+  "name": "gradient-border",
+  "type": "registry:component",
+  "title": "Gradient Border",
+  "description": "Animated rotating gradient border that wraps any element.",
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "gradient-border.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nexport interface GradientBorderProps {\n  children: React.ReactNode\n  className?: string\n  containerClassName?: string\n  colors?: string[]\n  duration?: number\n  borderWidth?: number\n  borderRadius?: string\n}\n\nexport function GradientBorder({\n  children,\n  className,\n  containerClassName,\n  colors = ['#a78bfa', '#60a5fa', '#f472b6', '#a78bfa'],\n  duration = 3,\n  borderWidth = 1,\n  borderRadius = '0.75rem',\n}: GradientBorderProps) {\n  const uid = React.useId().replace(/:/g, '')\n  const innerRadius = `calc(${borderRadius} - ${borderWidth}px)`\n\n  return (\n    <>\n      <style>{`\n        @property --gb-rot-${uid} {\n          syntax: '<angle>';\n          initial-value: 0deg;\n          inherits: false;\n        }\n        .gb-${uid} {\n          background: conic-gradient(\n            from var(--gb-rot-${uid}),\n            ${colors.join(', ')}\n          );\n          animation: gb-spin-${uid} ${duration}s linear infinite;\n        }\n        @keyframes gb-spin-${uid} {\n          to { --gb-rot-${uid}: 360deg; }\n        }\n      `}</style>\n      <div\n        className={cn('relative overflow-hidden', containerClassName)}\n        style={{ padding: borderWidth, borderRadius }}\n      >\n        <div\n          className={cn('gb-' + uid, 'absolute inset-[-200%]')}\n        />\n        <div\n          className={cn('relative z-10 overflow-hidden bg-zinc-950', className)}\n          style={{ borderRadius: innerRadius }}\n        >\n          {children}\n        </div>\n      </div>\n    </>\n  )\n}\n",
+      "type": "component"
+    }
+  ]
+}
