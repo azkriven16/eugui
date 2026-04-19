@@ -25,7 +25,7 @@ export function TypewriterText({
   const [wordIndex, setWordIndex] = React.useState(0)
   const [phase, setPhase] = React.useState<'typing' | 'pausing' | 'deleting'>('typing')
   const [cursorVisible, setCursorVisible] = React.useState(true)
-  const isDone = !loop && wordIndex >= words.length && phase === 'pausing'
+  const isDone = !loop && wordIndex >= words.length - 1 && phase === 'pausing'
 
   React.useEffect(() => {
     const id = setInterval(() => setCursorVisible(v => !v), 530)
@@ -45,8 +45,13 @@ export function TypewriterText({
         )
         return () => clearTimeout(id)
       }
-      const id = setTimeout(() => setPhase('deleting'), pauseDuration)
+      const id = setTimeout(() => setPhase('pausing'), pauseDuration)
       return () => clearTimeout(id)
+    }
+
+    if (phase === 'pausing') {
+      setPhase('deleting')
+      return
     }
 
     if (phase === 'deleting') {
@@ -60,10 +65,10 @@ export function TypewriterText({
   }, [displayed, phase, wordIndex, words, typeSpeed, deleteSpeed, pauseDuration, isDone])
 
   return (
-    <span className={cn('inline-flex items-center gap-[2px]', className)}>
+    <span className={cn('inline-flex items-center gap-0.5', className)}>
       <span>{displayed}</span>
       <span
-        className="inline-block w-[2px] shrink-0 bg-current"
+        className="inline-block w-0.5 shrink-0 bg-current"
         style={{
           height: '1.1em',
           opacity: isDone ? 1 : cursorVisible ? 1 : 0,

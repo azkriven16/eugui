@@ -27,7 +27,7 @@ export function SplitText({
   by = 'char',
 }: SplitTextProps) {
   const [inView, setInView] = React.useState(false)
-  const [hasAnimated, setHasAnimated] = React.useState(false)
+  const hasAnimatedRef = React.useRef(false)
   const ref = React.useRef<HTMLSpanElement>(null)
 
   React.useEffect(() => {
@@ -36,10 +36,10 @@ export function SplitText({
       return
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !(once && hasAnimated)) {
+        if (entry.isIntersecting && !(once && hasAnimatedRef.current)) {
           setInView(true)
           if (once)
-            setHasAnimated(true)
+            hasAnimatedRef.current = true
         }
         else if (!once) {
           setInView(entry.isIntersecting)
@@ -49,7 +49,7 @@ export function SplitText({
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [once, hasAnimated])
+  }, [once])
 
   const units = by === 'word' ? children.split(' ') : children.split('')
 

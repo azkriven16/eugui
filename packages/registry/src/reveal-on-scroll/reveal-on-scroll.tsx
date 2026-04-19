@@ -33,7 +33,7 @@ export function RevealOnScroll({
   once = true,
 }: RevealOnScrollProps) {
   const [inView, setInView] = React.useState(false)
-  const [hasAnimated, setHasAnimated] = React.useState(false)
+  const hasAnimatedRef = React.useRef(false)
   const ref = React.useRef<HTMLDivElement>(null)
 
   const base = DIRECTION_OFFSET[direction]
@@ -50,10 +50,10 @@ export function RevealOnScroll({
       return
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !(once && hasAnimated)) {
+        if (entry.isIntersecting && !(once && hasAnimatedRef.current)) {
           setInView(true)
           if (once)
-            setHasAnimated(true)
+            hasAnimatedRef.current = true
         }
         else if (!once) {
           setInView(entry.isIntersecting)
@@ -63,7 +63,7 @@ export function RevealOnScroll({
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [once, hasAnimated])
+  }, [once])
 
   return (
     <motion.div

@@ -30,7 +30,7 @@ export function StatCounter({
   className,
 }: StatCounterProps) {
   const [value, setValue] = React.useState(0)
-  const [hasAnimated, setHasAnimated] = React.useState(false)
+  const hasAnimatedRef = React.useRef(false)
   const ref = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
@@ -39,8 +39,8 @@ export function StatCounter({
       return
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true)
+        if (entry.isIntersecting && !hasAnimatedRef.current) {
+          hasAnimatedRef.current = true
           const startTime = performance.now()
           const tick = (now: number) => {
             const progress = Math.min((now - startTime) / duration, 1)
@@ -57,7 +57,7 @@ export function StatCounter({
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [end, duration, hasAnimated])
+  }, [end, duration])
 
   return (
     <div ref={ref} className={cn('flex flex-col items-center gap-1 text-center', className)}>

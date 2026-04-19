@@ -33,7 +33,7 @@ const COMPONENTS = [
   'Profile Card',
   'Tech Badge',
   'Review Card',
-  'Stat Counter',
+  'Parallax Layer',
 ]
 
 const FEATURES = [
